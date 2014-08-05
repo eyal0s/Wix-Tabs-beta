@@ -1,0 +1,128 @@
+.startframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	float: left;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+.nomargin{
+    margin:0;
+}
+
+.wixtabs {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 210px;
+    float:left;
+    height: 100%;
+    background-image: linear-gradient(to bottom, #F0F0F0 0%, #F0F0F0 100%);
+    margin:0;
+    color: #4F4747;
+    text-align: center;
+    z-index: 1000;
+    overflow: hidden;
+    font-family: Tahoma, Arial, sans-serif;
+    opacity: 0.6;
+    transition: linear .1s;
+    border-right: 1px solid #DDDDDD;
+}
+
+
+.wixtabs.hide{
+    display:block;
+    background-color: #999;
+    display: none;
+}
+
+.animated {
+    height:auto;
+    padding: 24px 18px;
+}
+
+
+.wixtabs .next{
+    /*background-color: #AD4FEE;*/
+    background-color: #7E7E7E;
+    color: #F0EEEE;
+}
+
+.wixtabs .next a h4{
+    /*background-color: #AD4FEE;*/
+    color: #F0EEEE;
+}
+
+.wixtabs .next:hover{
+    background-color: #CFCBCB;
+    color: #F0EEEE;
+    cursor: hand;
+}
+
+.wixtabs:hover{
+    opacity: 1;
+}
+
+
+#wixtabs .toggle.hide {
+    margin: 2px;
+    background: url("arrow2.png") 0 0 no-repeat;
+    background-size: 100% 100%;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    display: block;
+    right: 180px;
+}
+
+.wixtabs .content{
+    padding: 10px 10px;
+}
+
+.wixtabs .content .title{
+    color: #3D3636;
+    font-family: Tahoma;
+}
+
+/* COMMENTED FOR TESTING*/
+
+.wixtabs .description {
+	text-align: left;
+	font-size: 14px;
+}
+
+.wixtabs .description li{
+	padding: 10px 0px 10px 0px;
+	line-height: 150%;
+}
+
+
+/* Test Area */
+
+
+
+/* Test Area */
+
+#wixtabs .toggle{
+    cursor: pointer;
+
+    background: url(arrowClose.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    width: 20px;
+    height: 20px;
+    margin: 2px 0 0 8px;
+    z-index: 1001;
+    top: 0;
+    right: 0;
+    position: absolute;
+}
+
+
+.controls{
+    position: relative;
+    width: 210px;
+}

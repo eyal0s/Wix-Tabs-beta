@@ -1,0 +1,20 @@
+{
+  "name": "Wix Tabs - Discover Wix Users",
+  "description": "By Eyal Benezra",
+  "version": "0.1",
+  "background": {
+    "scripts": ["application.js"],
+    "persistent": false
+  },
+
+  "chrome_url_overrides": {
+    "newtab": "redirect.html"
+  },
+
+  "manifest_version": 2,
+
+  "permissions": [
+    "tabs",
+    "https://dl.dropboxusercontent.com/u/54065586/"
+  ]
+}
