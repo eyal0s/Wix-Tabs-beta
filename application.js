@@ -21,6 +21,11 @@ $(document).ready(function(){
         toggle_tab();
     });
 
+     $('.wixtabs').click(function(e){
+        e.preventDefault();
+        toggle_tab();
+    });
+
     $('#wixtabs .next').click( function(e){
         e.preventDefault();
         location.reload(); // Reloads the current document
@@ -72,7 +77,7 @@ function showSite(sitesList){
     // Set country
     if(obj.country){
         var nat = obj.country.toLowerCase();
-        $("<li><b>Made In:&nbsp;  </b></li>").append("<img src=\"blank.gif\" class=\"flag flag-" + nat + "\"" + " alt=\""  + nat + "\" title=\"" + nat + "\"/>").appendTo('.wixtabs .description');
+        $("<li><b>Made In:&nbsp;  </b></li>").append("<img src=\"blank.gif\" class=\"flag flag-" + nat + "\"" + " alt=\""  + nat + "\" title=\"" + getCountryName(obj.country) + "\"/>").appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
     }
 
