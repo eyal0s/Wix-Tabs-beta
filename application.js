@@ -104,7 +104,7 @@ function enOnly(str){
 
 }
 function appendItem(k, v){
-        $("<li><b>" + k + ":&nbsp;  </b></li>").append(v).appendTo('.wixtabs .description');
+        $("<li><b>" + k + ":&nbsp;  </b></li>").append(v).addClass("item").appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
         //
 }
