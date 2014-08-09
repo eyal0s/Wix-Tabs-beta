@@ -34,8 +34,9 @@
 }
 
 .wixtabs #title {
-    font-family: Helvetica; 
+    font-family: Tahoma; 
     font-size:16px;
+    font-weight: normal;
     margin: 10px 0px 10px 0px;
 
 
@@ -54,20 +55,33 @@
 
 
 .wixtabs .next{
-    /*background-color: #AD4FEE;*/
-    background-color: #7E7E7E;
+    background: #515151;
     color: #F0EEEE;
+    height: 27px;
+    padding: ;
+    margin: 0 auto;
+    width: 130px;
+    transition: .1s linear;
 }
 
-.wixtabs .next a h4{
-    /*background-color: #AD4FEE;*/
+.wixtabs .next a h5{
     color: #F0EEEE;
+    font-size: 16px;
+    font-weight: normal;
+    font-family: helvetica;
 }
 
 .wixtabs .next:hover{
     background-color: #CFCBCB;
     color: #F0EEEE;
     cursor: hand;
+}
+
+.wixtabs #btn-arr {
+    float: right;
+    margin: -32px 0 0 35px;
+    background-size: 32px;
+    height: 32px;
 }
 
 .wixtabs .refresh{
@@ -92,18 +106,40 @@
 }
 
 .wixtabs .description {
-	text-align: center;
+	text-align: left;
 	font-size: 13px;
 }
 
 .wixtabs .description li{
-	padding: 4px 0px 4px 0px;
+    margin: 2px 0px;
+	padding: 4px 0px;
 	line-height: 120%;
     list-style-type: none;
 }
 
+/*set li bullet images*/
 #date {
     list-style: square url("paper_clip.png");
+}
+
+#app {
+    list-style: square url("store-icon.png");
+}
+
+#pack {
+    list-style: square url("package-icon.png");
+}
+
+#temp {
+    list-style: square url("temp-icon.png");
+}
+
+#country {
+    list-style: square url("earth-icon.png");
+}
+
+.flag{ 
+    height: 26px;
 }
 
 li span {

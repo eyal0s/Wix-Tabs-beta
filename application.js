@@ -1,8 +1,5 @@
 $(document).ready(function(){
 
-    // deletes local storage
-    //localStorage.clear();
-
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.html";
     var sitesList = localStorage['sitesList'];
 
@@ -53,18 +50,14 @@ function showSite(sitesList){
     url = obj.url;
     $('iframe.startframe').attr('src', url);
 
-    // Set date of creation
-    if (obj.datecreated) {
-        //appendItem("Before",dayCount(obj.datecreated));
-        $("<li></li>").append("published " + dayCount(obj.datecreated) + " days ago" ).wrapInner(("<span>")).attr("id","date").appendTo('.wixtabs .description');
-    };
+
 
     // Set app name
     if(obj.appname){
         if (obj.appname.toLowerCase().valueOf() == "no app".valueOf()) {
-            appendItem("App", obj.appname.toLowerCase());
+            appendItem("App", obj.appname.toLowerCase(), "app");
         } else {
-            appendItem("App", obj.appname.toLowerCase() + " - " + obj.sitetype.toLowerCase());
+            appendItem("App", obj.appname.toLowerCase() + " - " + obj.sitetype.toLowerCase(), "app");
         }
         
     };
@@ -74,29 +67,24 @@ function showSite(sitesList){
     if(obj.package){
         var packWithoutBrackets = obj.package.replace(/\(\)$/g, "").toLowerCase();
         if ((obj.cycle.valueOf() != obj.package.valueOf())) {
-            appendItem("Package", obj.cycle.toLowerCase() + " " + packWithoutBrackets);
+            appendItem("Package", obj.cycle.toLowerCase() + " " + packWithoutBrackets, "pack");
         } else {
-            appendItem("Package", packWithoutBrackets);
+            appendItem("Package", packWithoutBrackets, "pack");
         }  
     }
 
     // Set template name
     var tempname = obj.tempname.toLowerCase();
     if(tempname && enOnly(tempname)){
-        appendItem("Template", tempname);
+        appendItem("Template", tempname, "temp");
     }
 
     // Set country
     if(obj.country){
         var nat = obj.country.toLowerCase();
-        $("<li></li>").append("<img src=\"blank.gif\" class=\"flag flag-" + nat + "\"" + " alt=\""  + nat + "\" title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
+        //$("<li></li>").append("<img src=\"blank.gif\" class=\"flag flag-" + nat + "\"" + " alt=\""  + nat + "\" title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
+        $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"flags/" + getCountryName(obj.country) + ".png\""  + "title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
     }
-
-    // REMOVE - Est. views
-    /*if(true){
-        $('<li><b>Estimated Views:&nbsp; ?</b></li>').appendTo('.wixtabs .description');
-        $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
-    }*/
 
     // Set sites url href
     if(obj.url){
@@ -114,9 +102,9 @@ function enOnly(str){
 
 };
 
-function appendItem(k, v){
-        $("<li><b>" + k + ":&nbsp;  </b></li>").append(v).addClass("item").appendTo('.wixtabs .description');
-        //$("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
+function appendItem(k, v, id){
+        $("<li><b>" + k + "</b><br></li>").append(v).attr("id",id).appendTo('.wixtabs .description');
+        $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
         //
 };
 
