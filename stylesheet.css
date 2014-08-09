@@ -34,9 +34,9 @@
 }
 
 .wixtabs #title {
-    font-family: Tahoma; 
+    font-family: Raleway, Helvetica; 
     font-size:16px;
-    font-weight: normal;
+ 
     margin: 10px 0px 10px 0px;
 
 
@@ -90,6 +90,12 @@
     cursor: hand;
 }
 
+.wixtabs .contact{
+    position: absolute;
+    bottom: 0;
+    cursor: hand;
+    margin-left: 40px;
+}
 
 
 .wixtabs:hover{

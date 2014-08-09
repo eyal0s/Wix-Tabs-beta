@@ -35,14 +35,17 @@ $(document).ready(function(){
         location.reload(); // Reloads the current document
     })
 
+    $(".contact").tooltip();
+
 
     
     
 });
 
+
 function showSite(sitesList){
 
-    // Get a new site from the feed
+    // Get a new site object from the feed
     siteKey = sitesList.length - 1;
     obj = sitesList[siteKey];
     sitesList.splice(siteKey,1);
@@ -52,7 +55,7 @@ function showSite(sitesList){
 
 
 
-    // Set app name
+    // Set apps name
     if(obj.appname){
         if (obj.appname.toLowerCase().valueOf() == "no app".valueOf()) {
             appendItem("App", obj.appname.toLowerCase(), "app");
@@ -63,7 +66,7 @@ function showSite(sitesList){
     };
 
     // Set package
-    // Removes Double appearance of strings as in "Free Free" and brackets
+    // Removes double appearance of strings as in "Free Free" and brackets
     if(obj.package){
         var packWithoutBrackets = obj.package.replace(/\(\)$/g, "").toLowerCase();
         if ((obj.cycle.valueOf() != obj.package.valueOf())) {
@@ -81,8 +84,6 @@ function showSite(sitesList){
 
     // Set country
     if(obj.country){
-        var nat = obj.country.toLowerCase();
-        //$("<li></li>").append("<img src=\"blank.gif\" class=\"flag flag-" + nat + "\"" + " alt=\""  + nat + "\" title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
         $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"flags/" + getCountryName(obj.country) + ".png\""  + "title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
     }
 
@@ -96,18 +97,21 @@ function showSite(sitesList){
 
 }
 
+// assert true if text composed of latin
 function enOnly(str){
     var pat = /[a-z]/;
     return pat.test(str);
 
 };
 
+// add key, value and id to the description container
 function appendItem(k, v, id){
         $("<li><b>" + k + "</b><br></li>").append(v).attr("id",id).appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
         //
 };
 
+// returns the amount of time passed since date
 function dayCount(date) {
     var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
     var firstDate = new Date(date);
@@ -115,6 +119,7 @@ function dayCount(date) {
 
     return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
 };
+
 
 function toggle_tab(){
     $('#wixtabs .toggle').toggleClass('hide');
