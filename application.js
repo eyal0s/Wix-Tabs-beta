@@ -21,21 +21,25 @@ $(document).ready(function(){
         toggle_tab();
     });
 
-     $('.wixtabs').click(function(e){
-        e.preventDefault();
-        toggle_tab();
-    });
+    //  $('.wixtabs').click(function(e){
+    //     e.preventDefault();
+    //     toggle_tab();
+    // });
 
     $('#wixtabs .next').click( function(e){
         e.preventDefault();
         location.reload(); // Reloads the current document
     })
 
-        $('#wixtabs .refresh').click( function(e){
+    $(".refresh").tooltip();
+    $('#wixtabs .refresh').click( function(e){
         e.preventDefault();
         localStorage.clear();
         location.reload(); // Reloads the current document
     })
+
+
+    
     
 });
 
@@ -52,33 +56,32 @@ function showSite(sitesList){
     // Set date of creation
     if (obj.datecreated) {
         //appendItem("Before",dayCount(obj.datecreated));
-        $("<li></li>").append("about " + dayCount(obj.datecreated) + " days ago" ).wrapInner(("<span>")).attr("id","date").appendTo('.wixtabs .description');
-        $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
+        $("<li></li>").append("published " + dayCount(obj.datecreated) + " days ago" ).wrapInner(("<span>")).attr("id","date").appendTo('.wixtabs .description');
     };
 
     // Set app name
     if(obj.appname){
-        appendItem("App", obj.appname);
-    };
-
-    // Set site type
-    if(obj.sitetype){
-        appendItem("Type", obj.sitetype);
+        if (obj.appname.toLowerCase().valueOf() == "no app".valueOf()) {
+            appendItem("App", obj.appname.toLowerCase());
+        } else {
+            appendItem("App", obj.appname.toLowerCase() + " - " + obj.sitetype.toLowerCase());
+        }
+        
     };
 
     // Set package
     // Removes Double appearance of strings as in "Free Free" and brackets
     if(obj.package){
-        var packWithoutBrackets = obj.package.replace(/\(\)$/g, "");
+        var packWithoutBrackets = obj.package.replace(/\(\)$/g, "").toLowerCase();
         if ((obj.cycle.valueOf() != obj.package.valueOf())) {
-            appendItem("Package", obj.cycle + " " + packWithoutBrackets);
+            appendItem("Package", obj.cycle.toLowerCase() + " " + packWithoutBrackets);
         } else {
             appendItem("Package", packWithoutBrackets);
         }  
     }
 
     // Set template name
-    var tempname = obj.tempname;
+    var tempname = obj.tempname.toLowerCase();
     if(tempname && enOnly(tempname)){
         appendItem("Template", tempname);
     }
@@ -86,8 +89,7 @@ function showSite(sitesList){
     // Set country
     if(obj.country){
         var nat = obj.country.toLowerCase();
-        $("<li><b>Made In:&nbsp;  </b></li>").append("<img src=\"blank.gif\" class=\"flag flag-" + nat + "\"" + " alt=\""  + nat + "\" title=\"" + getCountryName(obj.country) + "\"/>").appendTo('.wixtabs .description');
-        $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
+        $("<li></li>").append("<img src=\"blank.gif\" class=\"flag flag-" + nat + "\"" + " alt=\""  + nat + "\" title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
     }
 
     // REMOVE - Est. views

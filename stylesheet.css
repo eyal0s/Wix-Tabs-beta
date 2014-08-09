@@ -70,6 +70,14 @@
     cursor: hand;
 }
 
+.wixtabs .refresh{
+    position: absolute;
+    bottom: 0;
+    cursor: hand;
+}
+
+
+
 .wixtabs:hover{
     opacity: 1;
 }
@@ -84,13 +92,14 @@
 }
 
 .wixtabs .description {
-	text-align: left;
+	text-align: center;
 	font-size: 13px;
 }
 
 .wixtabs .description li{
-	padding: 10px 0px 10px 0px;
-	line-height: 150%;
+	padding: 4px 0px 4px 0px;
+	line-height: 120%;
+    list-style-type: none;
 }
 
 #date {
