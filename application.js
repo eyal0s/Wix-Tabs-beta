@@ -40,6 +40,8 @@ $(document).ready(function(){
 });
 
 function showSite(sitesList){
+
+    // Get a new site from the feed
     siteKey = sitesList.length - 1;
     obj = sitesList[siteKey];
     sitesList.splice(siteKey,1);
@@ -47,15 +49,22 @@ function showSite(sitesList){
     url = obj.url;
     $('iframe.startframe').attr('src', url);
 
+    // Set date of creation
+    if (obj.datecreated) {
+        //appendItem("Before",dayCount(obj.datecreated));
+        $("<li></li>").append("about " + dayCount(obj.datecreated) + " days ago" ).wrapInner(("<span>")).attr("id","date").appendTo('.wixtabs .description');
+        $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
+    };
+
     // Set app name
     if(obj.appname){
         appendItem("App", obj.appname);
-    }
+    };
 
     // Set site type
     if(obj.sitetype){
         appendItem("Type", obj.sitetype);
-    }
+    };
 
     // Set package
     // Removes Double appearance of strings as in "Free Free" and brackets
@@ -98,16 +107,24 @@ function showSite(sitesList){
 }
 
 function enOnly(str){
-    var pattern = /[a-z]/;
-    console.log(pattern.test(str));
-    return pattern.test(str);
+    var pat = /[a-z]/;
+    return pat.test(str);
 
-}
+};
+
 function appendItem(k, v){
         $("<li><b>" + k + ":&nbsp;  </b></li>").append(v).addClass("item").appendTo('.wixtabs .description');
-        $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
+        //$("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
         //
-}
+};
+
+function dayCount(date) {
+    var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
+    var firstDate = new Date(date);
+    var secondDate = new Date();
+
+    return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
+};
 
 function toggle_tab(){
     $('#wixtabs .toggle').toggleClass('hide');

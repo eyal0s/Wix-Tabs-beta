@@ -18,7 +18,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 210px;
+    width: 180px;
     float:left;
     height: 100%;
     background-image: linear-gradient(to bottom, #F0F0F0 0%, #F0F0F0 100%);
@@ -27,14 +27,14 @@
     text-align: center;
     z-index: 1000;
     overflow: hidden;
-    font-family: Tahoma, Arial, sans-serif;
+    font-family: Helvetica Neue,Tahoma, Arial, sans-serif;
     opacity: 0.6;
-    transition: linear .1s;
+    transition: .1s linear;
     border-right: 1px solid #DDDDDD;
 }
 
 .wixtabs #title {
-    font-family:Tahoma; 
+    font-family: Helvetica; 
     font-size:16px;
     margin: 10px 0px 10px 0px;
 
@@ -74,37 +74,32 @@
     opacity: 1;
 }
 
-
-#wixtabs .toggle.hide {
-    margin: 2px;
-    background: url("arrow2.png") 0 0 no-repeat;
-    background-size: 100% 100%;
-    width: 20px;
-    height: 20px;
-    overflow: hidden;
-    display: block;
-    right: 180px;
-}
-
 .wixtabs .content{
     padding: 10px 10px;
 }
 
 .wixtabs .content .title{
     color: #3D3636;
-    font-family: Tahoma;
+    font-family: Helvetica;
 }
-
-/* COMMENTED FOR TESTING*/
 
 .wixtabs .description {
 	text-align: left;
-	font-size: 14px;
+	font-size: 13px;
 }
 
 .wixtabs .description li{
 	padding: 10px 0px 10px 0px;
 	line-height: 150%;
+}
+
+#date {
+    list-style: square url("paper_clip.png");
+}
+
+li span {
+ position: relative; 
+ left: -7px;
 }
 
 
@@ -118,9 +113,10 @@
 
 /* Test Area */
 
+/*Controlors*/
+
 #wixtabs .toggle{
     cursor: pointer;
-
     background: url(arrowClose.png) 0 0 no-repeat;
     background-size: 100% 100%;
     width: 20px;
@@ -132,8 +128,18 @@
     position: absolute;
 }
 
-
 .controls{
     position: relative;
-    width: 210px;
+    width: 180px;
+}
+
+#wixtabs .toggle.hide {
+    margin: 2px;
+    background: url("arrow2.png") 0 0 no-repeat;
+    background-size: 100% 100%;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    display: block;
+    right: 155px;
 }
