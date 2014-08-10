@@ -13,6 +13,8 @@
 
   "manifest_version": 2,
 
+    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+
   "permissions": [
     "tabs",
     "https://dl.dropboxusercontent.com/u/54065586/"

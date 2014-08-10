@@ -1,4 +1,17 @@
+    // analytics
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-53672371-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
 $(document).ready(function(){
+
+
 
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.html";
     var sitesList = localStorage['sitesList'];
@@ -15,6 +28,7 @@ $(document).ready(function(){
 
     $('#wixtabs .toggle').click(function(e){
         e.preventDefault();
+         _gaq.push(['_trackEvent', "event", "toggle"]);
         toggle_tab();
     });
 
@@ -25,7 +39,9 @@ $(document).ready(function(){
 
     $('#wixtabs .next').click( function(e){
         e.preventDefault();
+         _gaq.push(['_trackEvent', "event", "next"]);
         location.reload(); // Reloads the current document
+       
     })
 
     $(".refresh").tooltip();
@@ -35,10 +51,7 @@ $(document).ready(function(){
         location.reload(); // Reloads the current document
     })
 
-    $(".contact").tooltip();
-
-
-    
+    $(".contact").tooltip();  
     
 });
 
@@ -52,6 +65,7 @@ function showSite(sitesList){
     localStorage['sitesList'] = JSON.stringify(sitesList);
     url = obj.url;
     $('iframe.startframe').attr('src', url);
+    _gaq.push(['_trackEvent', "event", 'newtab']);
 
 
 
@@ -131,6 +145,5 @@ function toggle_tab(){
     $('#wixtabs .toggle').toggleClass('hide');
     $('.wixtabs').toggleClass('hide');
 }
-
 
 
