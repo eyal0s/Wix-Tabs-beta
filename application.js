@@ -14,8 +14,6 @@ _gaq.push(['_trackPageview']);
 
 $(document).ready(function(){
 
-
-
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.html";
     var sitesList = localStorage['sitesList'];
 
@@ -61,7 +59,7 @@ $(document).ready(function(){
 
 function showSite(sitesList){
 
-    // Get a new site object from the feed
+    // get a new site object from the feed
     siteKey = sitesList.length - 1;
     obj = sitesList[siteKey];
     sitesList.splice(siteKey,1);
@@ -72,7 +70,7 @@ function showSite(sitesList){
 
 
 
-    // Set apps name
+    // set apps name
     if(obj.appname){
         if (obj.appname.toLowerCase().valueOf() == "no app".valueOf()) {
             appendItem("App", obj.appname.toLowerCase(), "app");
@@ -82,8 +80,8 @@ function showSite(sitesList){
         
     };
 
-    // Set package
-    // Removes double appearance of strings as in "Free Free" and brackets
+    // set package
+    // removes double appearance of strings as in "Free Free" and brackets
     if(obj.package){
         var packWithoutBrackets = obj.package.replace(/\(\)$/g, "").toLowerCase();
         if ((obj.cycle.valueOf() != obj.package.valueOf())) {
@@ -93,24 +91,25 @@ function showSite(sitesList){
         }  
     }
 
-    // Set template name
+    // set template name
     var tempname = obj.tempname.toLowerCase();
     if(tempname && enOnly(tempname)){
         appendItem("Template", tempname, "temp");
     }
 
-    // Set country
+    // set country
     if(obj.country){
         $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"flags/" + getCountryName(obj.country) + ".png\""  + "title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
     }
 
+    // set date created
     if (obj.datecreated) {
         $li = $('<li></li>').attr("id","date");
         $('<span></span>').text("published " + dayCount(obj.datecreated) + " days ago").appendTo($li);
         $li.appendTo('.wixtabs .description');
 
     };
-    // Set sites url href
+    // set sites url href
     if(obj.url){
         $li = $('<li></li>');
         $('<a></a>').text('site link').attr('href', obj.url).attr('target','_BLANK').appendTo($li);

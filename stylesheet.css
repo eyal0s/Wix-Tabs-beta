@@ -57,7 +57,6 @@
     background: #515151;
     color: #F0EEEE;
     height: 27px;
-    padding: ;
     margin: 0 auto;
     width: 130px;
     transition: .1s linear;
@@ -68,7 +67,8 @@
     font-size: 16px;
     font-weight: normal;
     font-family: helvetica;
-    
+    padding-top: 2px;
+
 }
 
 .wixtabs .next:hover{

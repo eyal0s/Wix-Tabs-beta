@@ -1,7 +1,6 @@
 {
   "name": "Wix Tabs - get to know Wix users",
-  "description": "By Eyal Benezra",
-  "version": "1.0",
+  "version": "0.1",
   "background": {
     "scripts": ["application.js"],
     "persistent": false
