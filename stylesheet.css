@@ -66,8 +66,9 @@
 .wixtabs .next a h5{
     color: #F0EEEE;
     font-size: 16px;
-    /*font-weight: normal;*/
+    font-weight: normal;
     font-family: helvetica;
+    margin: 4px 0px 3px 0px;
 }
 
 .wixtabs .next:hover{
@@ -130,23 +131,23 @@
 }
 
 #app {
-    list-style: square url("store-icon.png");
+    /*list-style: square url("store-icon.png");*/
+    list-style-image: none;
 }
 
 #pack {
-    list-style: square url("package-icon.png");
+    /*list-style: square url("package-icon.png");*/
+    list-style-image: none;
 }
 
 #temp {
-    list-style: square url("temp-icon.png");
+    /*list-style: square url("temp-icon.png");*/
+    list-style-image: none;
 }
 
-#country {
-    list-style: square url("earth-icon.png");
-}
 
 .flag{ 
-    height: 26px;
+    height: 18px;
 }
 
 li span {

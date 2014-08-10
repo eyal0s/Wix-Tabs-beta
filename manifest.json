@@ -13,6 +13,10 @@
 
   "manifest_version": 2,
 
+  "icons": { "16": "wixtabs16.png",
+           "48": "wixtabs48.png",
+          "128": "wixtabs128.png" },
+
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "update_url": "https://dl.dropboxusercontent.com/u/54065586/updates.xml",
 
