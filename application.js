@@ -70,7 +70,7 @@ function showSite(sitesList){
     if(obj.package){
         var packWithoutBrackets = obj.package.replace(/\(\)$/g, "").toLowerCase();
         if ((obj.cycle.valueOf() != obj.package.valueOf())) {
-            appendItem("Package", obj.cycle.toLowerCase() + " " + packWithoutBrackets, "pack");
+            appendItem("Package", packWithoutBrackets + " paid " + obj.cycle.toLowerCase(), "pack");
         } else {
             appendItem("Package", packWithoutBrackets, "pack");
         }  
@@ -87,10 +87,16 @@ function showSite(sitesList){
         $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"flags/" + getCountryName(obj.country) + ".png\""  + "title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
     }
 
+    if (obj.datecreated) {
+        $li = $('<li></li>').attr("id","date");
+        $('<span></span>').text("published " + dayCount(obj.datecreated) + " days ago").appendTo($li);
+        $li.appendTo('.wixtabs .description');
+
+    };
     // Set sites url href
     if(obj.url){
         $li = $('<li></li>');
-        $('<a></a>').text('Go To Site').attr('href', obj.url).attr('target','_BLANK').appendTo($li);
+        $('<a></a>').text('site link').attr('href', obj.url).attr('target','_BLANK').appendTo($li);
         $li.appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
     }

@@ -35,9 +35,8 @@
 
 .wixtabs #title {
     font-family: Raleway, Helvetica; 
-    font-size:16px;
- 
-    margin: 10px 0px 10px 0px;
+    font-size:17px;
+    margin: 10px 0px;
 
 
 }
@@ -67,7 +66,7 @@
 .wixtabs .next a h5{
     color: #F0EEEE;
     font-size: 16px;
-    font-weight: normal;
+    /*font-weight: normal;*/
     font-family: helvetica;
 }
 
@@ -126,6 +125,8 @@
 /*set li bullet images*/
 #date {
     list-style: square url("paper_clip.png");
+    padding-left: -10px;
+
 }
 
 #app {
@@ -151,6 +152,7 @@
 li span {
  position: relative; 
  left: -7px;
+
 }
 
 
