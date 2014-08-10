@@ -28,7 +28,7 @@
     z-index: 1000;
     overflow: hidden;
     font-family: Helvetica Neue,Tahoma, Arial, sans-serif;
-    opacity: 0.6;
+    opacity: 0.4;
     transition: .1s linear;
     border-right: 1px solid #DDDDDD;
 }
