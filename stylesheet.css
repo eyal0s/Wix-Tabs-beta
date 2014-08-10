@@ -68,7 +68,7 @@
     font-size: 16px;
     font-weight: normal;
     font-family: helvetica;
-    margin: 4px 0px 3px 0px;
+    
 }
 
 .wixtabs .next:hover{
@@ -77,12 +77,12 @@
     cursor: hand;
 }
 
-.wixtabs #btn-arr {
+/*.wixtabs #btn-arr {
     float: right;
     margin: -32px 0 0 35px;
     background-size: 32px;
     height: 32px;
-}
+}*/
 
 .wixtabs .refresh{
     position: absolute;
