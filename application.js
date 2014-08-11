@@ -1,4 +1,4 @@
-/*Written by Eyal Benezra*/    
+/*By Eyal Benezra*/    
 
 
 // analytics
@@ -97,18 +97,22 @@ function showSite(sitesList){
         appendItem("Template", tempname, "temp");
     }
 
+
+        // set date created
+    if (obj.datecreated) {
+        // $li = $('<li></li>').text("published " + dayCount(obj.datecreated) + " days ago");
+        // $li.appendTo('.wixtabs .description');
+        appendItem("Published", dayCount(obj.datecreated) + " days ago");
+     };
+
     // set country
     if(obj.country){
         $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"flags/" + getCountryName(obj.country) + ".png\""  + "title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
     }
 
-    // set date created
-    if (obj.datecreated) {
-        $li = $('<li></li>').attr("id","date");
-        $('<span></span>').text("published " + dayCount(obj.datecreated) + " days ago").appendTo($li);
-        $li.appendTo('.wixtabs .description');
 
-    };
+
+   
     // set sites url href
     if(obj.url){
         $li = $('<li></li>');

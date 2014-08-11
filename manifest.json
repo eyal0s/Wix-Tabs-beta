@@ -17,7 +17,6 @@
           "128": "wixtabs128.png" },
 
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
-  "update_url": "https://dl.dropboxusercontent.com/u/54065586/updates.xml",
 
 
   "permissions": [
