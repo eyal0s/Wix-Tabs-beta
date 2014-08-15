@@ -1,5 +1,5 @@
 {
-  "name": "Wix Tabs - get to know Wix users",
+  "name": "Wix Tabs - get to know Wix users[test]",
   "version": "0.25",
   "background": {
     "scripts": ["application.js"],
