@@ -1,6 +1,6 @@
 {
   "name": "Wix Tabs - get to know Wix users",
-  "version": "0.1",
+  "version": "0.25",
   "background": {
     "scripts": ["application.js"],
     "persistent": false
@@ -12,9 +12,9 @@
 
   "manifest_version": 2,
 
-  "icons": { "16": "wixtabs16.png",
-           "48": "wixtabs48.png",
-          "128": "wixtabs128.png" },
+  "icons": { "16": "layout/wixtabs16.png",
+           "48": "layout/wixtabs48.png",
+          "128": "layout/wixtabs128.png" },
 
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 

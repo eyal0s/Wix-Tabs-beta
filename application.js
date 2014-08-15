@@ -60,7 +60,10 @@ $(document).ready(function(){
 function showSite(sitesList){
 
     // get a new site object from the feed
-    siteKey = sitesList.length - 1;
+
+    siteKey = Math.round((sitesList.length - 1) * Math.random());
+    console.log("Debug - picked " + siteKey);
+    console.log("Debug - left " + sitesList.length - 1);
     obj = sitesList[siteKey];
     sitesList.splice(siteKey,1);
     localStorage['sitesList'] = JSON.stringify(sitesList);
@@ -107,7 +110,7 @@ function showSite(sitesList){
 
     // set country
     if(obj.country){
-        $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"flags/" + getCountryName(obj.country) + ".png\""  + "title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
+        $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"layout/flags/" + getCountryName(obj.country) + ".png\""  + "title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
     }
 
 
@@ -123,7 +126,7 @@ function showSite(sitesList){
 
 }
 
-// assert true if text composed of latin
+// assert true if letters are latin
 function enOnly(str){
     var pat = /[a-z]/;
     return pat.test(str);
