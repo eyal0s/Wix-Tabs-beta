@@ -1,6 +1,5 @@
 /*By Eyal Benezra*/    
 
-//localStorage.clear();
 // analytics
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-53672371-1']);
@@ -14,14 +13,20 @@ _gaq.push(['_trackPageview']);
 
 $(document).ready(function(){
 
-    var feed = "https://dl.dropboxusercontent.com/u/54065586/feed[test].json";
-    var sitesList = localStorage['sitesList'];
-
-    if(typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0 ) {
+    var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
+    var sitesList = localStorage.sitesList;
+    
+    // case version was updated. get new sites from the feed
+    if (typeof localStorage.refreshFlag == "undefined") {
+        refreshCache();
+        localStorage.refreshFlag = false;
+    }
+    
+    if(typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
         showSite( JSON.parse(sitesList) );
     } else {
         $.get(feed, function(obj){
-           localStorage['sitesList'] = JSON.stringify(obj);
+           localStorage.sitesList = JSON.stringify(obj);
            showSite(JSON.parse(obj));
         });
     }
@@ -42,7 +47,7 @@ $(document).ready(function(){
     $(".refresh").tooltip();
     $('#wixtabs .refresh').click( function(e){
         e.preventDefault();
-        localStorage.clear();
+        refreshCache();
         location.reload(); // Reloads the current document
     });
 
@@ -57,7 +62,7 @@ function showSite(sitesList){
     siteKey = Math.round((sitesList.length - 1) * Math.random());
     obj = sitesList[siteKey];
     sitesList.splice(siteKey,1);
-    localStorage['sitesList'] = JSON.stringify(sitesList);
+    localStorage.sitesList = JSON.stringify(sitesList);
     url = obj.url;
 
     // display the chosen site
@@ -145,4 +150,9 @@ function toggle_tab(){
     $('.wixtabs').toggleClass('hide');
 }
 
+// refresh site cache when updating versions
+function refreshCache(){
+    localStorage.clear();
+    console.log("Wix tabs site cache was refreshed");
+}
 
