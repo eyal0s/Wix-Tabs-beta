@@ -14,6 +14,7 @@ _gaq.push(['_trackPageview']);
 $(document).ready(function(){
 
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
+    //var feed = "https://www.dropbox.com/s/qio0o7cdzxbvgo8/test.json";
     var sitesList = localStorage.sitesList;
     
     // case version was updated. get new sites from the feed
