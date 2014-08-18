@@ -1,4 +1,8 @@
-/*By Eyal Benezra*/    
+/*By Eyal Benezra
+ver 0.32
+
+
+*/    
 
 // analytics
 var _gaq = _gaq || [];
@@ -15,9 +19,10 @@ $(document).ready(function(){
 
     //refreshCacheAfterUpdating();
     //var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
-    var feed = "https://dl.dropboxusercontent.com/u/54065586/test.json";
+    var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
     var sitesList = localStorage.wixSitesList;
     
+    //if (lastUpdate) {};
     // case version was updated. get new sites from the feed
     // if (typeof localStorage.refreshFlag == "undefined") {
     //     refreshCache();
