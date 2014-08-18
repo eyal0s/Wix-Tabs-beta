@@ -13,21 +13,22 @@ _gaq.push(['_trackPageview']);
 
 $(document).ready(function(){
 
-    var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
-    //var feed = "https://www.dropbox.com/s/qio0o7cdzxbvgo8/test.json";
-    var sitesList = localStorage.sitesList;
+    //refreshCacheAfterUpdating();
+    //var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
+    var feed = "https://dl.dropboxusercontent.com/u/54065586/test.json";
+    var sitesList = localStorage.wixSitesList;
     
     // case version was updated. get new sites from the feed
-    if (typeof localStorage.refreshFlag == "undefined") {
-        refreshCache();
-        localStorage.refreshFlag = false;
-    }
+    // if (typeof localStorage.refreshFlag == "undefined") {
+    //     refreshCache();
+    //     localStorage.refreshFlag = false;
+    // }
     
     if(typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
         showSite( JSON.parse(sitesList) );
     } else {
         $.get(feed, function(obj){
-           localStorage.sitesList = JSON.stringify(obj);
+           localStorage.wixSitesList = JSON.stringify(obj);
            showSite(JSON.parse(obj));
         });
     }
@@ -63,8 +64,8 @@ function showSite(sitesList){
     siteKey = Math.round((sitesList.length - 1) * Math.random());
     obj = sitesList[siteKey];
     sitesList.splice(siteKey,1);
-    localStorage.sitesList = JSON.stringify(sitesList);
-    url = obj.url;
+    localStorage.wixSitesList = JSON.stringify(sitesList);
+    url = obj['Url'];
 
     // display the chosen site
     $('iframe.startframe').attr('src', url);
@@ -74,29 +75,29 @@ function showSite(sitesList){
 /* set toolbar variables */
 
     // set app name
-    if(obj['app name']){
-        if (obj['app name'].toLowerCase().valueOf() == "no app".valueOf()) {
-            appendItem("App", obj['app name'].toLowerCase(), "app");
+    if(obj['App Name']){
+        if (obj['App Name'].toLowerCase().valueOf() == "no app".valueOf()) {
+            appendItem("App", obj['App Name'].toLowerCase(), "app");
         } else {
-            appendItem("App", obj['app name'].toLowerCase() + " - " + obj['site type'].toLowerCase(), "app");
+            appendItem("App", obj['App Name'].toLowerCase() + " - " + obj['Site Type'].toLowerCase(), "app");
         }
         
     }
 
     // set package
     // removes double appearance of strings as in "Free Free" and brackets
-    if(obj.package){
-        var packWithoutBrackets = obj.package.replace(/\(\)$/g, "").toLowerCase();
-        if ((obj.cycle.valueOf() != obj.package.valueOf())) {
-            appendItem("Package", packWithoutBrackets + " paid " + obj.cycle.toLowerCase(), "pack");
+    if(obj['Package']){
+        var packWithoutBrackets = obj['Package'].replace(/\(\)$/g, "").toLowerCase();
+        if ((obj['Cycle'].valueOf() != obj['Package'].valueOf())) {
+            appendItem("Package", packWithoutBrackets + " paid " + obj['Cycle'].toLowerCase(), "pack");
         } else {
             appendItem("Package", packWithoutBrackets, "pack");
         }  
     }
 
     // set template name
-    if(obj['temp name']){
-        var tempname = obj['temp name'].toLowerCase();
+    if(obj['Temp Name']){
+        var tempname = obj['Temp Name'].toLowerCase();
         if (enOnly(tempname)) {
             appendItem("Template", tempname, "temp");
         }
@@ -104,19 +105,19 @@ function showSite(sitesList){
     }
 
     // set date created
-    if (obj['date created']) {
-        appendItem("Published", dayCount(obj['date created']) + " days ago");
+    if (obj['Date Created']) {
+        appendItem("Published", dayCount(obj['Date Created']) + " days ago");
      }
 
     // set country
-    if(obj.country){
-        $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"layout/flags/" + getCountryName(obj.country) + ".png\""  + "title=\"" + getCountryName(obj.country) + "\"/>").tooltip().appendTo('.wixtabs .description');
+    if(obj['Country']){
+        $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"layout/flags/" + getCountryName(obj['Country']) + ".png\""  + "title=\"" + getCountryName(obj['Country']) + "\"/>").tooltip().appendTo('.wixtabs .description');
     }
 
     // set sites url href
-    if(obj.url){
+    if(obj['Url']){
         $li = $('<li></li>');
-        $('<a></a>').text('site link').attr('href', obj.url).attr('target','_BLANK').appendTo($li);
+        $('<a></a>').text('site link').attr('href', obj['Url']).attr('target','_BLANK').appendTo($li);
         $li.appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
     }
@@ -156,4 +157,12 @@ function refreshCache(){
     localStorage.clear();
     console.log("Wix tabs site cache was refreshed");
 }
+
+// to be called only once after updating
+function refreshCacheAfterUpdating(){
+    refreshCache();
+    refreshCacheAfterUpdating = foo;
+}
+
+function foo () {}
 
