@@ -79,13 +79,8 @@ function showSite(sitesList) {
     $('iframe.startframe').attr('src', url);
     _gaq.push(['_trackEvent', "event", 'newtab']);
 
-    setToolbarData(obj);
 
-}
-
-function setToolbarData(obj) {
     /* set toolbar variables */
-
 
     // set app name
     if (obj['App Name']) {
@@ -135,8 +130,14 @@ function setToolbarData(obj) {
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
 
         // set view mode mobile\desktop
-        setViewMode(obj);
+        setViewMode(obj['Url']);
     }
+
+    
+ 
+
+
+
 }
 
 // assert true if letters are latin
@@ -186,14 +187,13 @@ function changeToDesktp(url) {
     return url.replace(/\?(showMobileView)=(true)/, "");
 }
 
-function setViewMode(obj) {
-    var url = obj['Url'];
+function setViewMode(url) {
     if (assertViewMode(url)) { // case mobile
         $('.change_view img').attr("src", "layout/laptop.png").attr("title", "See desktop version").tooltip();
         $('#wixtabs .change_view').click(function(e) {
             e.preventDefault();
             $('iframe.startframe').attr('src', changeToDesktp(url));
-            setToolbarData(obj);
+            setViewMode(url);
         });
 
     } else { // case desktop
@@ -201,7 +201,7 @@ function setViewMode(obj) {
         $('#wixtabs .change_view').click(function(e) {
             e.preventDefault();
             $('iframe.startframe').attr('src', changeToMobile(url));
-            setToolbarData(obj);
+            setViewMode(url);
         });
     }
 }
