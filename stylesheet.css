@@ -105,6 +105,15 @@
     width: 25px;
 }
 
+.wixtabs .change_view{
+    position: absolute;
+    bottom: 0;
+    cursor: hand !important;
+    margin-left: 60px;
+    height: 25px;
+    width: 25px;
+}
+
 
 .wixtabs:hover{
     opacity: 1;
@@ -155,7 +164,7 @@
 
 #wixtabs .toggle{
     cursor: pointer;
-    background: url("layout/arrow_close.png") 0 0 no-repeat;
+    background: url("layout/arrow_close_grey.png") 0 0 no-repeat;
     background-size: 100% 100%;
     width: 20px;
     height: 20px;
@@ -173,7 +182,7 @@
 
 #wixtabs .toggle.hide {
     margin: 2px;
-    background: url("layout/arrow_open.png") 0 0 no-repeat;
+    background: url("layout/arrow_open_grey.png") 0 0 no-repeat;
     background-size: 100% 100%;
     width: 20px;
     height: 20px;
