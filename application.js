@@ -193,7 +193,7 @@ function setViewMode(url) {
         $('#wixtabs .change_view').click(function(e) {
             e.preventDefault();
             $('iframe.startframe').attr('src', changeToDesktp(url));
-            setViewMode(url);
+            setViewMode(changeToDesktp(url));
         });
 
     } else { // case desktop
@@ -201,7 +201,7 @@ function setViewMode(url) {
         $('#wixtabs .change_view').click(function(e) {
             e.preventDefault();
             $('iframe.startframe').attr('src', changeToMobile(url));
-            setViewMode(url);
+            setViewMode(changeToMobile(url));
         });
     }
 }
