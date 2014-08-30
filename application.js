@@ -133,8 +133,8 @@ function showSite(sitesList) {
         setViewMode(obj['Url']);
     }
 
-    
- 
+
+
 
 
 
@@ -174,6 +174,7 @@ function refreshCache() {
     console.log("Wix tabs site cache was refreshed");
 }
 
+// return true case mobile view
 function assertViewMode(url) {
     var pat = /\?(showMobileView)=(true)/;
     return pat.test(url);
@@ -189,19 +190,25 @@ function changeToDesktp(url) {
 
 function setViewMode(url) {
     if (assertViewMode(url)) { // case mobile
-        $('.change_view img').attr("src", "layout/laptop.png").attr("title", "See desktop version").tooltip();
+        $('.change_view img').attr("src", "layout/laptop.png").attr("title", "Toggle desktop view mode").tooltip();
         $('#wixtabs .change_view').click(function(e) {
             e.preventDefault();
             $('iframe.startframe').attr('src', changeToDesktp(url));
-            setViewMode(changeToDesktp(url));
+            setTimeout(function() {
+                setViewMode(changeToDesktp(url));
+            }, 1500);
+
         });
 
     } else { // case desktop
-        $('.change_view img').attr("src", "layout/mobile.png").attr("title", "See mobile version").tooltip();
+        $('.change_view img').attr("src", "layout/mobile.png").attr("title", "Toggle mobile view mode").tooltip();
         $('#wixtabs .change_view').click(function(e) {
             e.preventDefault();
             $('iframe.startframe').attr('src', changeToMobile(url));
-            setViewMode(changeToMobile(url));
+            setTimeout(function() {
+                setViewMode(changeToMobile(url));
+            }, 1500);
+
         });
     }
 }
