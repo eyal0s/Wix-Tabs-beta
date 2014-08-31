@@ -18,17 +18,8 @@ _gaq.push(['_trackPageview']);
 
 $(document).ready(function() {
 
-    //refreshCacheAfterUpdating();
-    //var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
     var sitesList = localStorage.wixSitesList;
-
-    //if (lastUpdate) {};
-    // case version was updated. get new sites from the feed
-    // if (typeof localStorage.refreshFlag == "undefined") {
-    //     refreshCache();
-    //     localStorage.refreshFlag = false;
-    // }
 
     if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
         showSite(JSON.parse(sitesList));
@@ -146,8 +137,7 @@ function showSite(sitesList) {
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
 
     }
-
-
+    
     // set view mode
     setViewMode(obj['Url']);
 }
