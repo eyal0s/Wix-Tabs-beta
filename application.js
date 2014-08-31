@@ -46,13 +46,27 @@ $(document).ready(function() {
         toggle_tab();
     });
 
+    $('#wixtabs #mobile').click(function(e) {
+        e.preventDefault();
+        if (!$(this).hasClass("active")) {
+            $('#wixtabs #desktop').removeClass("active");
+            $('iframe.startframe').attr('src', changeToMobile(url));
+        }
+    });
+
+    $('#wixtabs #desktop').click(function(e) {
+        e.preventDefault();
+        if (!$(this).hasClass("active")) {
+            $('#wixtabs #mobile').removeClass("active");
+            $('iframe.startframe').attr('src', changeToDesktp(url));
+        }
+    });
+
     $('#wixtabs .next').click(function(e) {
         e.preventDefault();
         location.reload(); // Reloads the current document
 
     });
-
-    $(".refresh").tooltip();
 
     $('#wixtabs .refresh').click(function(e) {
         e.preventDefault();
@@ -60,8 +74,8 @@ $(document).ready(function() {
         location.reload(); // Reloads the current document
     });
 
+    $(".refresh").tooltip();
     $(".contact").tooltip();
-
     $('.btn').button();
 
 });
@@ -72,9 +86,12 @@ function showSite(sitesList) {
     // get a new site object from the feed
     siteKey = Math.round((sitesList.length - 1) * Math.random());
     obj = sitesList[siteKey];
+    console.log(localStorage.wixSitesList);
+    console.log("site is: " + obj['Url'] + " index is: " + siteKey);
     sitesList.splice(siteKey, 1);
     localStorage.wixSitesList = JSON.stringify(sitesList);
     url = obj['Url'];
+    console.log(localStorage.wixSitesList);
 
     // display the chosen site
     $('iframe.startframe').attr('src', url);
@@ -120,7 +137,10 @@ function showSite(sitesList) {
 
     // set country
     if (obj['Country']) {
-        $("<li><b>Made In &nbsp;</b></li>").append("<img class=\"flag\" src=\"layout/flags/" + getCountryName(obj['Country']) + ".png\"" + "title=\"" + getCountryName(obj['Country']) + "\"/>").tooltip().appendTo('.wixtabs .description');
+        var flag = $("<img class=\"flag\" src=\"layout/flags/" + getCountryName(obj['Country']) + ".png\"" + "\"/>").tooltip({
+            title: getCountryName(obj['Country'])
+        });
+        $("<li><b>Made In &nbsp;</b></li>").append(flag).appendTo('.wixtabs .description');
     }
 
     // set sites url href
@@ -130,15 +150,9 @@ function showSite(sitesList) {
         $li.appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
 
-        // set view mode mobile\desktop
-        setViewMode(obj['Url']);
     }
-
-
-
-
-
-
+    // set view mode
+    setViewMode(obj['Url']);
 }
 
 // assert true if letters are latin
@@ -167,7 +181,7 @@ function dayCount(date) {
 function toggle_tab() {
     $('.wixtabs').toggleClass('hide');
     $('#toggle_open').toggleClass('hide');
-    
+
 }
 
 // refresh site cache when updating versions
@@ -176,8 +190,8 @@ function refreshCache() {
     console.log("Wix tabs site cache was refreshed");
 }
 
-// return true case mobile view
-function assertViewMode(url) {
+// returns true case mobile view
+function assertMobileViewMode(url) {
     var pat = /\?(showMobileView)=(true)/;
     return pat.test(url);
 }
@@ -191,26 +205,11 @@ function changeToDesktp(url) {
 }
 
 function setViewMode(url) {
-    if (assertViewMode(url)) { // case mobile
-        $('.change_view img').attr("src", "layout/laptop.png").attr("title", "Toggle desktop view mode").tooltip();
-        $('#wixtabs .change_view').click(function(e) {
-            e.preventDefault();
-            $('iframe.startframe').attr('src', changeToDesktp(url));
-            setTimeout(function() {
-                setViewMode(changeToDesktp(url));
-            }, 1500);
-
-        });
-
-    } else { // case desktop
-        $('.change_view img').attr("src", "layout/mobile.png").attr("title", "Toggle mobile view mode").tooltip();
-        $('#wixtabs .change_view').click(function(e) {
-            e.preventDefault();
-            $('iframe.startframe').attr('src', changeToMobile(url));
-            setTimeout(function() {
-                setViewMode(changeToMobile(url));
-            }, 1500);
-
-        });
+    if (assertMobileViewMode(url)) {
+        $('#wixtabs #mobile').addClass("active");
+    } else {
+        $('#wixtabs #desktop').addClass("active");
     }
 }
+
+

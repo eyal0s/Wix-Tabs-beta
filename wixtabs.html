@@ -2,35 +2,15 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <!-- <link rel="stylesheet" type="text/css" href="foundation.css"> -->
-    <link rel="stylesheet" type="text/css" href="jquery-ui-1.11.0.custom/jquery-ui.css">
-    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-
-    <!--Bootstrap-->
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-    <link href="/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet type='text/css">
-
-
-    <script src='jquery-ui-1.11.0.custom/external/jquery/jquery.js'></script>
-    <script src='jquery-ui-1.11.0.custom/jquery-ui.js'></script>
-    <script src='countryCodeConversion.js'></script>
-    <script src='application.js'></script>
     <title>Wix Tab</title>
 </head>
 
 <body style="width: 100%;padding:0;margin:0;overflow:hidden;" id="wixtabs">
 
-
-
     <!--Info Toolbar-->
+    <a href="./"><div id="toggle_open" class="toggle hide"></div></a>
     <div class="wixtabs">
-        <div id="toggle_close" class="toggle"><i class="fa fa-align-justify fa-2x"></i></div>
+        <div id="toggle_close" class="toggle"></div>
         <div class="content">
             <h4 id="title">Wix Tab</h4>
             <div>
@@ -39,7 +19,7 @@
             <div class="description"></div>
             <br>
         </div>
-
+        <li><b>View </b><br>
         <div id="view_toggle" class="btn-group btn-group-justified">
             <div class="btn-group">
                 <button type="button" class="btn btn-default btn-sm" id="desktop">Desktop
@@ -50,22 +30,37 @@
                 </button>
             </div>
         </div>
+        </li>
         <button type="button" class="btn btn-primary next">Next Site</button>
-        <div class="refresh">
+        <div class="refresh" data-toggle="tooltip" data-placement="top" title="Refresh site cache">
             <a href="./">
                 <i class="fa fa-refresh fa-2x"></i>
             </a>
         </div>
-        <div class="contact">
+        <div data-toggle="tooltip" data-placement="top" title="Report bugs and share your thoughts" class="contact">
             <a href="mailto:eyalbe@wix.com">
                 <i class="fa fa-envelope-o fa-2x"></i>
             </a>
         </div>
     </div>
-    
+
     <!--Wix site frame-->
     <iframe class="startframe"></iframe>
-    <div id="toggle_open" class="toggle hide"></div>
+
+
+    <!--dependencies-->
+
+    <!--style-->
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+    <link href="/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet type='text/css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <!--scripts-->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src='countryCodeConversion.js'></script>
+    <script src='application.js'></script>
 
 </body>
 
