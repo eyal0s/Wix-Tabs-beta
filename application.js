@@ -18,26 +18,8 @@ _gaq.push(['_trackPageview']);
 
 $(document).ready(function() {
 
-    //refreshCacheAfterUpdating();
-    //var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
-    var sitesList = localStorage.wixSiteszList;
-
-    //if (lastUpdate) {};
-    // case version was updated. get new sites from the feed
-    // if (typeof localStorage.refreshFlag == "undefined") {
-    //     refreshCache();
-    //     localStorage.refreshFlag = false;
-    // }
-
-    // if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
-    //     showSite(JSON.parse(sitesList));
-    // } else {
-    //     $.get(feed, function(obj) {
-    //         sitesList = JSON.stringify(obj);
-    //         showSite(JSON.parse(obj));
-    //     });
-    // }
+    var sitesList = localStorage.wixSitesList;
 
 
     $.get(feed, function(obj) {
@@ -72,13 +54,6 @@ $(document).ready(function() {
 
     });
 
-    // $('#wixtabs .refresh').click(function(e) {
-    //     e.preventDefault();
-    //     refreshCache();
-    //     location.reload(); // Reloads the current document
-    // });
-
-    $(".refresh").tooltip();
     $(".contact").tooltip();
     $('.btn').button();
 
@@ -88,9 +63,19 @@ $(document).ready(function() {
 function showSite(sitesList) {
 
     // get a new site object from the feed
-    siteKey = Math.round((sitesList.length - 1) * Math.random());
+    if(localStorage.wixTabsCounter != "undefined" || (localStorage.wixTabsCounter == sitesList.length - 1)) {
+        localStorage.setItem("counter", 0);
+    } else {
+        localStorage.wixTabsCounter++;
+    }
+
+    localStorage.setItem("counter", "5");
+    
+    siteKey = localStorage.wixTabsCounter;
+    console.log(localStorage.wixTabsCounter);
+    //siteKey = Math.round((sitesList.length - 1) * Math.random());
     obj = sitesList[siteKey];
-    sitesList.splice(siteKey, 1);
+    // sitesList.splice(siteKey, 1);
     // localStorage.wixSitesList = JSON.stringify(sitesList);
     url = obj['Url'];
 
@@ -152,7 +137,6 @@ function showSite(sitesList) {
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
 
     }
-
 
     // set view mode
     setViewMode(obj['Url']);
