@@ -53,6 +53,7 @@ $(document).ready(function() {
     });
 
     $(".refresh").tooltip();
+
     $('#wixtabs .refresh').click(function(e) {
         e.preventDefault();
         refreshCache();
@@ -164,8 +165,9 @@ function dayCount(date) {
 
 // toolbar toggle
 function toggle_tab() {
-    $('#wixtabs .toggle').toggleClass('hide');
     $('.wixtabs').toggleClass('hide');
+    $('#toggle_open').toggleClass('hide');
+    
 }
 
 // refresh site cache when updating versions

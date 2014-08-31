@@ -1,5 +1,6 @@
 .startframe {
     position: absolute;
+    z-index: 3;
     top: 0;
     left: 0;
     float: left;
@@ -121,12 +122,12 @@
 .flag {
     height: 18px;
 }
-#wixtabs .toggle {
+#wixtabs #toggle_close {
     cursor: pointer;
-    background: url("layout/arrow_close_grey.png") 0 0 no-repeat;
-    background-size: 100% 100%;
-    width: 20px;
-    height: 20px;
+/*    background: url("layout/arrow_close_grey.png") 0 0 no-repeat;
+*/    background-size: 100% 100%;
+/*    width: 20px;
+    height: 20px;*/
     margin: 2px 0 0 8px;
     z-index: 1001;
     top: 2px;
@@ -137,8 +138,10 @@
     position: relative;
     width: 180px;
 }
-#wixtabs .toggle.hide {
+ #toggle_open {
     margin: 2px;
+    position: absolute;
+    z-index: 10;
     background: url("layout/arrow_open_grey.png") 0 0 no-repeat;
     background-size: 100% 100%;
     width: 20px;
