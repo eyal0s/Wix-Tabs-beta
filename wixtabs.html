@@ -3,9 +3,20 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <link rel="stylesheet" type="text/css" href="foundation.css">
+    <!-- <link rel="stylesheet" type="text/css" href="foundation.css"> -->
     <link rel="stylesheet" type="text/css" href="jquery-ui-1.11.0.custom/jquery-ui.css">
     <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+    <!--Bootstrap-->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <link href="/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet type='text/css">
+
+
     <script src='jquery-ui-1.11.0.custom/external/jquery/jquery.js'></script>
     <script src='jquery-ui-1.11.0.custom/jquery-ui.js'></script>
     <script src='countryCodeConversion.js'></script>
@@ -21,42 +32,39 @@
     </div>
     <div class="wixtabs">
         <hr class="nomargin">
-        <hr class="nomargin">
         <div class="content">
             <h4 id="title">Wix Tab</h4>
-            <hr class="nomargin">
+            <div>
+                <hr class="nomargin">
+            </div>
             <div class="description"></div>
             <br>
         </div>
-        <div>
-            <ul class="button-group [radius round]">
-                <li><a href="./" class="[tiny small large] button [alert success secondary] [disabled]">Desktop</a>
-                </li>
-                <li><a href="./" class="[tiny small large] button [alert success secondary] [disabled]">Mobile</a>
-                </li>
-            </ul>
-        </div>
-        <div class="change_view">
-            <a href="./">
-                <img src="" title="">
-            </a>
+
+        <div id="view_toggle" class="btn-group btn-group-justified">
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" id="desktop"><i class="fa fa-laptop fa-2x"></i>
+                </button>
+            </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default btn-sm" id="mobile"><i class="fa fa-mobile fa-2x"></i>
+                </button>
+            </div>
         </div>
 
-        <div class="next">
-            <a href="./">
-                <h5>next site</h5>
-            </a>
-        </div>
+
+        <button type="button" class="btn btn-primary next">Next Site</button>
         <!--  <hr class="nomargin" id="bottom"> -->
         <div class="refresh">
             <a href="./">
-                <img src="layout/refresh_icon.png" title="Refresh site cache">
+               <i class="fa fa-refresh fa-2x"></i>
             </a>
         </div>
         <div class="contact">
             <a href="mailto:eyalbe@wix.com">
-                <img src="layout/contact.png" title="Report bugs and share your thoughts">
+                <i class="fa fa-envelope-o fa-2x"></i>
             </a>
+            
         </div>
 
     </div>

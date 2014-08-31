@@ -43,13 +43,11 @@ $(document).ready(function() {
 
     $('#wixtabs .toggle').click(function(e) {
         e.preventDefault();
-        _gaq.push(['_trackEvent', "event", "toggle"]);
         toggle_tab();
     });
 
     $('#wixtabs .next').click(function(e) {
         e.preventDefault();
-        _gaq.push(['_trackEvent', "event", "next"]);
         location.reload(); // Reloads the current document
 
     });
@@ -62,6 +60,8 @@ $(document).ready(function() {
     });
 
     $(".contact").tooltip();
+
+    $('.btn').button();
 
 });
 
