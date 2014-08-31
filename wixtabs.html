@@ -8,7 +8,9 @@
 <body style="width: 100%;padding:0;margin:0;overflow:hidden;" id="wixtabs">
 
     <!--Info Toolbar-->
-    <a href="./"><div id="toggle_open" class="toggle hide"></div></a>
+    <a href="./">
+        <div id="toggle_open" class="toggle hide"></div>
+    </a>
     <div class="wixtabs">
         <div id="toggle_close" class="toggle"></div>
         <div class="content">
@@ -17,26 +19,30 @@
                 <hr class="nomargin">
             </div>
             <div class="description"></div>
-            <br>
-        </div>
-        <li><b>View </b><br>
-        <div id="view_toggle" class="btn-group btn-group-justified">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm" id="desktop">Desktop
-                </button>
+            <div class="toggle_view">
+                <li><b>View Mode</b>
+                    <br>
+                    <div id="view_toggle" class="btn-group btn-group-justified">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm" id="desktop">Desktop
+                            </button>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-sm" id="mobile">Mobile
+                            </button>
+                        </div>
+                    </div>
+                </li>
             </div>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm" id="mobile">Mobile
-                </button>
-            </div>
+            <hr class="nomargin">
         </div>
-        </li>
+
         <button type="button" class="btn btn-primary next">Next Site</button>
-        <div class="refresh" data-toggle="tooltip" data-placement="top" title="Refresh site cache">
+    <!--     <div class="refresh" data-toggle="tooltip" data-placement="top" title="Refresh site cache">
             <a href="./">
                 <i class="fa fa-refresh fa-2x"></i>
             </a>
-        </div>
+        </div> -->
         <div data-toggle="tooltip" data-placement="top" title="Report bugs and share your thoughts" class="contact">
             <a href="mailto:eyalbe@wix.com">
                 <i class="fa fa-envelope-o fa-2x"></i>

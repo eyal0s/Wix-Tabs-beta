@@ -55,24 +55,24 @@
     color: #515151;
 }
 #view_toggle {
-    width: 75%;
-    margin: 0 auto;
+    width: 80%;
+    margin: 5px auto;
 }
 .wixtabs .next{
     margin: 20px auto;
 }
 
-.wixtabs .refresh {
+.wixtabs .contact {
     position: absolute;
     bottom: 0;
     margin-left: 3px;
 }
-.wixtabs .contact {
+/*.wixtabs .refresh {
     position: absolute;
     bottom: 0;
     margin-left: 33px;
     text-align: left;
-}
+}*/
 
 .wixtabs:hover {
     opacity: 1;
@@ -88,6 +88,7 @@
 .wixtabs .description {
     text-align: left;
     font-size: 13px;
+
 }
 .wixtabs .description li {
     margin: 2px 0px;
@@ -95,6 +96,19 @@
     line-height: 120%;
     list-style-type: none;
 }
+
+.toggle_view {
+    margin: 2px 0px;
+    padding: 4px 0px;
+    line-height: 120%;
+    list-style-type: none;
+}
+
+.toggle_view li  {
+    text-align: left;
+    font-size: 13px;
+}
+
 
 .flag {
     height: 18px;

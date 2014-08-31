@@ -1,7 +1,5 @@
 /*By Eyal Benezra
-ver 0.332
-
-
+ver 0.334
 */
 
 // analytics
@@ -23,7 +21,7 @@ $(document).ready(function() {
     //refreshCacheAfterUpdating();
     //var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
-    var sitesList = localStorage.wixSitesList;
+    var sitesList = localStorage.wixSiteszList;
 
     //if (lastUpdate) {};
     // case version was updated. get new sites from the feed
@@ -32,14 +30,20 @@ $(document).ready(function() {
     //     localStorage.refreshFlag = false;
     // }
 
-    if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
-        showSite(JSON.parse(sitesList));
-    } else {
-        $.get(feed, function(obj) {
-            localStorage.wixSitesList = JSON.stringify(obj);
-            showSite(JSON.parse(obj));
-        });
-    }
+    // if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
+    //     showSite(JSON.parse(sitesList));
+    // } else {
+    //     $.get(feed, function(obj) {
+    //         sitesList = JSON.stringify(obj);
+    //         showSite(JSON.parse(obj));
+    //     });
+    // }
+
+
+    $.get(feed, function(obj) {
+        sitesList = JSON.stringify(obj);
+        showSite(JSON.parse(obj));
+    });
 
     $('#wixtabs .toggle').click(function(e) {
         e.preventDefault();
@@ -68,11 +72,11 @@ $(document).ready(function() {
 
     });
 
-    $('#wixtabs .refresh').click(function(e) {
-        e.preventDefault();
-        refreshCache();
-        location.reload(); // Reloads the current document
-    });
+    // $('#wixtabs .refresh').click(function(e) {
+    //     e.preventDefault();
+    //     refreshCache();
+    //     location.reload(); // Reloads the current document
+    // });
 
     $(".refresh").tooltip();
     $(".contact").tooltip();
@@ -86,12 +90,9 @@ function showSite(sitesList) {
     // get a new site object from the feed
     siteKey = Math.round((sitesList.length - 1) * Math.random());
     obj = sitesList[siteKey];
-    console.log(localStorage.wixSitesList);
-    console.log("site is: " + obj['Url'] + " index is: " + siteKey);
     sitesList.splice(siteKey, 1);
-    localStorage.wixSitesList = JSON.stringify(sitesList);
+    // localStorage.wixSitesList = JSON.stringify(sitesList);
     url = obj['Url'];
-    console.log(localStorage.wixSitesList);
 
     // display the chosen site
     $('iframe.startframe').attr('src', url);
@@ -151,6 +152,8 @@ function showSite(sitesList) {
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
 
     }
+
+
     // set view mode
     setViewMode(obj['Url']);
 }
@@ -211,5 +214,3 @@ function setViewMode(url) {
         $('#wixtabs #desktop').addClass("active");
     }
 }
-
-
