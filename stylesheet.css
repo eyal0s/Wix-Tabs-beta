@@ -67,12 +67,12 @@
     bottom: 0;
     margin-left: 3px;
 }
-/*.wixtabs .refresh {
+.wixtabs .refresh {
     position: absolute;
     bottom: 0;
-    margin-left: 33px;
+    margin-left: 36px;
     text-align: left;
-}*/
+}
 
 .wixtabs:hover {
     opacity: 1;

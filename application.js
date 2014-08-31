@@ -21,7 +21,7 @@ $(document).ready(function() {
     //refreshCacheAfterUpdating();
     //var feed = "https://dl.dropboxusercontent.com/u/54065586/feed.json";
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
-    var sitesList = localStorage.wixSiteszList;
+    var sitesList = localStorage.wixSitesList;
 
     //if (lastUpdate) {};
     // case version was updated. get new sites from the feed
@@ -30,20 +30,14 @@ $(document).ready(function() {
     //     localStorage.refreshFlag = false;
     // }
 
-    // if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
-    //     showSite(JSON.parse(sitesList));
-    // } else {
-    //     $.get(feed, function(obj) {
-    //         sitesList = JSON.stringify(obj);
-    //         showSite(JSON.parse(obj));
-    //     });
-    // }
-
-
-    $.get(feed, function(obj) {
-        sitesList = JSON.stringify(obj);
-        showSite(JSON.parse(obj));
-    });
+    if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
+        showSite(JSON.parse(sitesList));
+    } else {
+        $.get(feed, function(obj) {
+            sitesList = JSON.stringify(obj);
+            showSite(JSON.parse(obj));
+        });
+    }
 
     $('#wixtabs .toggle').click(function(e) {
         e.preventDefault();
@@ -72,11 +66,11 @@ $(document).ready(function() {
 
     });
 
-    // $('#wixtabs .refresh').click(function(e) {
-    //     e.preventDefault();
-    //     refreshCache();
-    //     location.reload(); // Reloads the current document
-    // });
+    $('#wixtabs .refresh').click(function(e) {
+        e.preventDefault();
+        refreshCache();
+        location.reload(); // Reloads the current document
+    });
 
     $(".refresh").tooltip();
     $(".contact").tooltip();
@@ -88,10 +82,10 @@ $(document).ready(function() {
 function showSite(sitesList) {
 
     // get a new site object from the feed
-    siteKey = Math.round((sitesList.length - 1) * Math.random());
-    obj = sitesList[siteKey];
-    sitesList.splice(siteKey, 1);
-    // localStorage.wixSitesList = JSON.stringify(sitesList);
+    // siteKey = Math.round((sitesList.length - 1) * Math.random());
+    obj = sitesList[sitesList.length - 1];
+    sitesList.splice(sitesList.length - 1, 1);
+    localStorage.wixSitesList = JSON.stringify(sitesList);
     url = obj['Url'];
 
     // display the chosen site
