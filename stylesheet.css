@@ -1,3 +1,4 @@
+
 .startframe {
     position: absolute;
     z-index: 3;
@@ -10,14 +11,8 @@
     margin: 0;
     border: none;
 }
-.nomargin {
-    margin: 0;
-    height: 3px;
-    border-top-color: rgba(81, 81, 81, 0.1);
-}
-/*#bottom {
-    margin-top: 285px;
-}*/
+
+
 
 .wixtabs {
     position: absolute;
@@ -50,6 +45,11 @@
 .animated {
     height: auto;
     padding: 24px 18px;
+}
+.nomargin {
+    margin: 0;
+    height: 3px;
+    border-top-color: rgba(81, 81, 81, 0.1);
 }
 .fa {
     color: #515151;
@@ -96,20 +96,16 @@
     line-height: 120%;
     list-style-type: none;
 }
-
 .toggle_view {
     margin: 2px 0px;
     padding: 4px 0px;
     line-height: 120%;
     list-style-type: none;
 }
-
 .toggle_view li  {
     text-align: left;
     font-size: 13px;
 }
-
-
 .flag {
     height: 18px;
 }
