@@ -1,12 +1,10 @@
 /*By Eyal Benezra
 ver 0.334
 */
-
 // analytics
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-53672371-1']);
 _gaq.push(['_trackPageview']);
-
 (function() {
     var ga = document.createElement('script');
     ga.type = 'text/javascript';
@@ -15,9 +13,7 @@ _gaq.push(['_trackPageview']);
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(ga, s);
 })();
-
 $(document).ready(function() {
-
     /* If the sites list is empty get a new list from the feed*/
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
     var sitesList = localStorage.wixSitesList;
@@ -29,13 +25,11 @@ $(document).ready(function() {
             showSite(JSON.parse(obj));
         });
     }
-
     // set click handlers
     $('#wixtabs .toggle').click(function(e) {
         e.preventDefault();
         toggle_tab();
     });
-
     $('#wixtabs #mobile').click(function(e) {
         e.preventDefault();
         if (!$(this).hasClass("active")) {
@@ -43,7 +37,7 @@ $(document).ready(function() {
             $('iframe.startframe').attr('src', changeToMobile(url));
         }
     });
-
+    //
     $('#wixtabs #desktop').click(function(e) {
         e.preventDefault();
         if (!$(this).hasClass("active")) {
@@ -51,45 +45,32 @@ $(document).ready(function() {
             $('iframe.startframe').attr('src', changeToDesktp(url));
         }
     });
-
     $('#wixtabs .next').click(function(e) {
         e.preventDefault();
         location.reload(); // Reloads the current document
-
     });
-
     $('#wixtabs .refresh').click(function(e) {
         e.preventDefault();
         refreshCache();
         location.reload(); // Reloads the current document
     });
-
-
     // init bootstrap 
     $(".refresh").tooltip();
     $(".contact").tooltip();
     $('.btn').button();
-
 });
 
-
 function showSite(sitesList) {
-
     // get a new site object from the list
     // siteKey = Math.round((sitesList.length - 1) * Math.random());
     obj = sitesList[sitesList.length - 1];
     sitesList.splice(sitesList.length - 1, 1);
     localStorage.wixSitesList = JSON.stringify(sitesList);
     url = obj['Url'];
-
     // display the chosen site in the iframe
     $('iframe.startframe').attr('src', url);
     _gaq.push(['_trackEvent', "event", 'newtab']);
-
-
-
     /* set toolbar variables */
-
     // set app name
     if (obj['App Name']) {
         if (obj['App Name'].toLowerCase().valueOf() == "no app".valueOf()) {
@@ -132,64 +113,50 @@ function showSite(sitesList) {
         $('<a></a>').text('site link').attr('href', obj['Url']).attr('target', '_BLANK').appendTo($li);
         $li.appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
-
     }
-
     // set view mode - mobile / desktop 
     setViewMode(obj['Url']);
 }
-
 // assert true if letters are latin
 function enOnly(str) {
     var pat = /[a-z]/;
     return pat.test(str);
-
 }
-
 // add key, value and id to the description container
 function appendItem(k, v, id) {
     $("<li><b>" + k + "</b><br></li>").append(v).attr("id", id).appendTo('.wixtabs .description');
     $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
 }
-
 // returns the amount of time passed since date param
 function dayCount(date) {
     var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
     var firstDate = new Date(date);
     var secondDate = new Date();
-
     return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
 }
-
 // toolbar toggle
 function toggle_tab() {
     $('.wixtabs').toggleClass('hide');
     $('#toggle_open').toggleClass('hide');
-
 }
-
 // refresh site cache at the local storage
 function refreshCache() {
     localStorage.clear();
     console.log("Wix tabs site cache was refreshed");
 }
-
 // returns true case mobile view
 function assertMobileViewMode(url) {
     var pat = /\?(showMobileView)=(true)/;
     return pat.test(url);
 }
-
 // adds a mobile=true query parameter
 function changeToMobile(url) {
     return url + "?showMobileView=true";
 }
-
 // remove the mobile query param
 function changeToDesktp(url) {
     return url.replace(/\?(showMobileView)=(true)/, "");
 }
-
 // ca
 function setViewMode(url) {
     if (assertMobileViewMode(url)) {
