@@ -1,5 +1,5 @@
 /*By Eyal Benezra
-ver 0.335
+ver 0.334
 */
 // analytics
 var _gaq = _gaq || [];
@@ -13,7 +13,6 @@ _gaq.push(['_trackPageview']);
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(ga, s);
 })();
-
 $(document).ready(function() {
     /* If the sites list is empty get a new list from the feed*/
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
@@ -38,6 +37,7 @@ $(document).ready(function() {
             $('iframe.startframe').attr('src', changeToMobile(url));
         }
     });
+    //
     $('#wixtabs #desktop').click(function(e) {
         e.preventDefault();
         if (!$(this).hasClass("active")) {
@@ -54,7 +54,7 @@ $(document).ready(function() {
         refreshCache();
         location.reload(); // Reloads the current document
     });
-    // init bootstrap components
+    // init bootstrap 
     $(".refresh").tooltip();
     $(".contact").tooltip();
     $('.btn').button();
@@ -63,19 +63,10 @@ $(document).ready(function() {
 function showSite(sitesList) {
     // get a new site object from the list
     // siteKey = Math.round((sitesList.length - 1) * Math.random());
-    var obj = sitesList[sitesList.length - 1];
+    obj = sitesList[sitesList.length - 1];
     sitesList.splice(sitesList.length - 1, 1);
     localStorage.wixSitesList = JSON.stringify(sitesList);
-    var url;
-    if (obj['Url']) {
-        url = obj['Url'];
-    }
-    if (obj['Site Url']) {
-        url = obj['Site Url'];
-    }
-    if (assertMobileViewMode(url)) {
-        url = changeToDesktp(url);
-    }
+    url = obj['Url'];
     // display the chosen site in the iframe
     $('iframe.startframe').attr('src', url);
     _gaq.push(['_trackEvent', "event", 'newtab']);
@@ -88,29 +79,15 @@ function showSite(sitesList) {
             appendItem("App", obj['App Name'].toLowerCase() + " - " + obj['Site Type'].toLowerCase(), "app");
         }
     }
-    //
-    console.log("out " + obj.Package);
-    console.log("out " + obj.Cycle);
-    //
     // set package
     // removes double appearance of strings as in "Free Free" and brackets
     if (obj['Package']) {
         var packWithoutBrackets = obj['Package'].replace(/\(\)$/g, "").toLowerCase();
-        console.log("1st: " + packWithoutBrackets);
-        var des;
-        if (obj['Cycle']) {
-            console.log("in if");
-            if ((obj['Cycle'].valueOf() != obj['Package'].valueOf())) {
-                des = packWithoutBrackets + " paid " + obj['Cycle'].toLowerCase();
-                console.log("2nd: " + des);
-            }
+        if ((obj['Cycle'].valueOf() != obj['Package'].valueOf())) {
+            appendItem("Package", packWithoutBrackets + " paid " + obj['Cycle'].toLowerCase(), "pack");
         } else {
-            console.log("in else");
-            des = packWithoutBrackets;
-            console.log("3rd: " + des);
+            appendItem("Package", packWithoutBrackets, "pack");
         }
-        console.log("4th: " + des);
-        appendItem("Package", des, "pack");
     }
     // set template name
     if (obj['Temp Name']) {
@@ -131,14 +108,14 @@ function showSite(sitesList) {
         $("<li><b>Made In &nbsp;</b></li>").append(flag).appendTo('.wixtabs .description');
     }
     // set site url href
-    if (url != "undefined") {
+    if (obj['Url']) {
         $li = $('<li></li>');
-        $('<a></a>').text('site link').attr('href', url).attr('target', '_BLANK').appendTo($li);
+        $('<a></a>').text('site link').attr('href', obj['Url']).attr('target', '_BLANK').appendTo($li);
         $li.appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
-        // set view mode - mobile / desktop 
-        setViewMode(url);
     }
+    // set view mode - mobile / desktop 
+    setViewMode(obj['Url']);
 }
 // assert true if letters are latin
 function enOnly(str) {
@@ -188,12 +165,3 @@ function setViewMode(url) {
         $('#wixtabs #desktop').addClass("active");
     }
 }
-
-// function toggleSanta(url) {
-//     var pat = /\?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false/;
-//     if (pat.test(url)) {
-//         return url.replace(/\?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false/, "");
-//     } else{
-//         return url + "?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false";
-//     }
-// }
