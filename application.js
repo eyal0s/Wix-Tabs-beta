@@ -17,7 +17,6 @@ _gaq.push(['_trackPageview']);
 $(document).ready(function() {
     /* If the sites list is empty get a new list from the feed*/
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
-    //var feed = "https://dl.dropboxusercontent.com/u/54065586/allTest.json";
     var sitesList = localStorage.wixSitesList;
     if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
         showSite(JSON.parse(sitesList));
@@ -44,13 +43,6 @@ $(document).ready(function() {
         if (!$(this).hasClass("active")) {
             $('#wixtabs #mobile').removeClass("active");
             $('iframe.startframe').attr('src', changeToDesktp(url));
-        }
-    });
-    $('#wixtabs #santa').click(function(e) {
-        e.preventDefault();
-        if (!$(this).hasClass("active")) {
-            $('#wixtabs #mobile').removeClass("active");
-            $('iframe.startframe').attr('src', toggleSanta(url));
         }
     });
     $('#wixtabs .next').click(function(e) {
@@ -96,18 +88,28 @@ function showSite(sitesList) {
             appendItem("App", obj['App Name'].toLowerCase() + " - " + obj['Site Type'].toLowerCase(), "app");
         }
     }
+    //
+    console.log("out " + obj.Package);
+    console.log("out " + obj.Cycle);
+    //
     // set package
     // removes double appearance of strings as in "Free Free" and brackets
     if (obj['Package']) {
         var packWithoutBrackets = obj['Package'].replace(/\(\)$/g, "").toLowerCase();
+        console.log("1st: " + packWithoutBrackets);
         var des;
         if (obj['Cycle']) {
+            console.log("in if");
             if ((obj['Cycle'].valueOf() != obj['Package'].valueOf())) {
                 des = packWithoutBrackets + " paid " + obj['Cycle'].toLowerCase();
+                console.log("2nd: " + des);
             }
         } else {
+            console.log("in else");
             des = packWithoutBrackets;
+            console.log("3rd: " + des);
         }
+        console.log("4th: " + des);
         appendItem("Package", des, "pack");
     }
     // set template name
@@ -187,11 +189,11 @@ function setViewMode(url) {
     }
 }
 
-function toggleSanta(url) {
-    var pat = /\?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false/;
-    if (pat.test(url)) {
-        return url.replace(/\?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false/, "");
-    } else{
-        return url + "?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false";
-    }
-}
+// function toggleSanta(url) {
+//     var pat = /\?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false/;
+//     if (pat.test(url)) {
+//         return url.replace(/\?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false/, "");
+//     } else{
+//         return url + "?petri_ovr=specs.RenderReactByUser:true;specs.DisableReactForSpecificEmbeddedServices:false";
+//     }
+// }
