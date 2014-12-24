@@ -1,7 +1,8 @@
 /*By Eyal Benezra
-ver 0.334
+ver 0.4 24/12/14
 */
-// analytics
+
+
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-53672371-1']);
 _gaq.push(['_trackPageview']);
@@ -13,6 +14,7 @@ _gaq.push(['_trackPageview']);
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(ga, s);
 })();
+
 $(document).ready(function() {
     /* If the sites list is empty get a new list from the feed*/
     var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
@@ -34,7 +36,7 @@ $(document).ready(function() {
         e.preventDefault();
         if (!$(this).hasClass("active")) {
             $('#wixtabs #desktop').removeClass("active");
-            $('iframe.startframe').attr('src', changeToMobile(url));
+            $('.startframe').attr('src', changeToMobile($('.startframe').attr('src')));
         }
     });
     //
@@ -42,7 +44,7 @@ $(document).ready(function() {
         e.preventDefault();
         if (!$(this).hasClass("active")) {
             $('#wixtabs #mobile').removeClass("active");
-            $('iframe.startframe').attr('src', changeToDesktp(url));
+            $('.startframe').attr('src', changeToDesktp($('.startframe').attr('src')));
         }
     });
     $('#wixtabs .next').click(function(e) {
@@ -54,19 +56,31 @@ $(document).ready(function() {
         refreshCache();
         location.reload(); // Reloads the current document
     });
-    // init bootstrap 
+    // init bootstrap
     $(".refresh").tooltip();
     $(".contact").tooltip();
     $('.btn').button();
 });
 
 function showSite(sitesList) {
-    // get a new site object from the list
-    // siteKey = Math.round((sitesList.length - 1) * Math.random());
+
     obj = sitesList[sitesList.length - 1];
     sitesList.splice(sitesList.length - 1, 1);
     localStorage.wixSitesList = JSON.stringify(sitesList);
-    url = obj['Url'];
+    
+    var url;
+    if (obj['Url']) {
+        url = obj['Url'];
+    }
+    if (obj['Site Url']) {
+        url = obj['Site Url'];
+    }
+    if (assertMobileViewMode(url)) {
+        alert(url);
+        url = changeToDesktp(url);
+        alert(url);
+        alert("mobile -> desktop");
+    }
     // display the chosen site in the iframe
     $('iframe.startframe').attr('src', url);
     _gaq.push(['_trackEvent', "event", 'newtab']);
@@ -110,12 +124,15 @@ function showSite(sitesList) {
     // set site url href
     if (obj['Url']) {
         $li = $('<li></li>');
-        $('<a></a>').text('site link').attr('href', obj['Url']).attr('target', '_BLANK').appendTo($li);
+        $('<a></a>').text('explore site').attr('href', $('.startframe').attr('src')).appendTo($li);
+        //$('<a></a>').text('site link').attr('href', obj['Url']).attr('target', '_BLANK').appendTo($li);
         $li.appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
     }
-    // set view mode - mobile / desktop 
-    setViewMode(obj['Url']);
+    // set view mode - mobile / desktop
+    //setViewMode(obj['Url']);
+    
+    setViewMode($('.startframe').attr('src'));
 }
 // assert true if letters are latin
 function enOnly(str) {
@@ -155,7 +172,7 @@ function changeToMobile(url) {
 }
 // remove the mobile query param
 function changeToDesktp(url) {
-    return url.replace(/\?(showMobileView)=(true)/, "");
+    return url.replace(/\?showMobileView=true/, "");
 }
 // ca
 function setViewMode(url) {
