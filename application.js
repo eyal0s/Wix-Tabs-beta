@@ -1,73 +1,98 @@
 /*By Eyal Benezra
 ver 0.4 24/12/14
 */
+// set chrome button
+// var isOn;
+// chrome.browserAction.getBadgeText({}, function(data) {
+//     if (data == 'off'){
+//         isOn = false;
+//     } else {
+//        isOn = true;
+//     }
+// });
+// chrome.browserAction.onClicked.addListener(function() {
+//     chrome.browserAction.getBadgeText({}, function(data) {
+//         var details;
+//         if (data == 'off') {
+//             details = {
+//                 text: "on"
+//             };
+            
+//         } else {
+//             details = {
+//                 text: "off"
+//             };
+//             isOn = false;
+//             alert("!");
+//         }
+//         chrome.browserAction.setBadgeText(details);
+//     });
+// });
 
-
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-53672371-1']);
-_gaq.push(['_trackPageview']);
-(function() {
-    var ga = document.createElement('script');
-    ga.type = 'text/javascript';
-    ga.async = true;
-    ga.src = 'https://ssl.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(ga, s);
-})();
-
-$(document).ready(function() {
-    /* If the sites list is empty get a new list from the feed*/
-    var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
-    var sitesList = localStorage.wixSitesList;
-    if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
-        showSite(JSON.parse(sitesList));
-    } else {
-        $.get(feed, function(obj) {
-            sitesList = JSON.stringify(obj);
-            showSite(JSON.parse(obj));
+//if (isOn) {
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-53672371-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+    $(document).ready(function() {
+        /* If the sites list is empty get a new list from the feed*/
+        var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
+        var sitesList = localStorage.wixSitesList;
+        if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
+            showSite(JSON.parse(sitesList));
+        } else {
+            $.get(feed, function(obj) {
+                sitesList = JSON.stringify(obj);
+                showSite(JSON.parse(obj));
+            });
+        }
+        // set click handlers
+        $('#wixtabs .toggle').click(function(e) {
+            e.preventDefault();
+            toggle_tab();
         });
-    }
-    // set click handlers
-    $('#wixtabs .toggle').click(function(e) {
-        e.preventDefault();
-        toggle_tab();
+        $('#wixtabs #mobile').click(function(e) {
+            e.preventDefault();
+            if (!$(this).hasClass("active")) {
+                $('#wixtabs #desktop').removeClass("active");
+                $('.startframe').attr('src', changeToMobile($('.startframe').attr('src')));
+            }
+        });
+        //
+        $('#wixtabs #desktop').click(function(e) {
+            e.preventDefault();
+            if (!$(this).hasClass("active")) {
+                $('#wixtabs #mobile').removeClass("active");
+                $('.startframe').attr('src', changeToDesktp($('.startframe').attr('src')));
+            }
+        });
+        $('#wixtabs .next').click(function(e) {
+            e.preventDefault();
+            location.reload(); // Reloads the current document
+        });
+        $('#wixtabs .refresh').click(function(e) {
+            e.preventDefault();
+            refreshCache();
+            location.reload(); // Reloads the current document
+        });
+        // init bootstrap
+        $(".refresh").tooltip();
+        $(".contact").tooltip();
+        $('.btn').button();
     });
-    $('#wixtabs #mobile').click(function(e) {
-        e.preventDefault();
-        if (!$(this).hasClass("active")) {
-            $('#wixtabs #desktop').removeClass("active");
-            $('.startframe').attr('src', changeToMobile($('.startframe').attr('src')));
-        }
-    });
-    //
-    $('#wixtabs #desktop').click(function(e) {
-        e.preventDefault();
-        if (!$(this).hasClass("active")) {
-            $('#wixtabs #mobile').removeClass("active");
-            $('.startframe').attr('src', changeToDesktp($('.startframe').attr('src')));
-        }
-    });
-    $('#wixtabs .next').click(function(e) {
-        e.preventDefault();
-        location.reload(); // Reloads the current document
-    });
-    $('#wixtabs .refresh').click(function(e) {
-        e.preventDefault();
-        refreshCache();
-        location.reload(); // Reloads the current document
-    });
-    // init bootstrap
-    $(".refresh").tooltip();
-    $(".contact").tooltip();
-    $('.btn').button();
-});
+//}
 
 function showSite(sitesList) {
-
     obj = sitesList[sitesList.length - 1];
     sitesList.splice(sitesList.length - 1, 1);
     localStorage.wixSitesList = JSON.stringify(sitesList);
-    
     var url;
     if (obj['Url']) {
         url = obj['Url'];
@@ -76,10 +101,7 @@ function showSite(sitesList) {
         url = obj['Site Url'];
     }
     if (assertMobileViewMode(url)) {
-        alert(url);
         url = changeToDesktp(url);
-        alert(url);
-        alert("mobile -> desktop");
     }
     // display the chosen site in the iframe
     $('iframe.startframe').attr('src', url);
@@ -124,14 +146,13 @@ function showSite(sitesList) {
     // set site url href
     if (obj['Url']) {
         $li = $('<li></li>');
-        $('<a></a>').text('explore site').attr('href', $('.startframe').attr('src')).appendTo($li);
+        $('<a></a>').text('Explore Site').attr('href', $('.startframe').attr('src')).appendTo($li);
         //$('<a></a>').text('site link').attr('href', obj['Url']).attr('target', '_BLANK').appendTo($li);
         $li.appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
     }
     // set view mode - mobile / desktop
     //setViewMode(obj['Url']);
-    
     setViewMode($('.startframe').attr('src'));
 }
 // assert true if letters are latin

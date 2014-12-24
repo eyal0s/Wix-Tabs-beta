@@ -1,7 +1,7 @@
 {
-  "name": "Wix Tabs[Testing]",
+  "name": "Wix Tabs",
   "description": "Get to know Wix users",
-  "version": "0.4",
+  "version": "0.444",
   "background": {
     "scripts": ["application.js"],
     "persistent": false
@@ -10,6 +10,7 @@
   "chrome_url_overrides": {
     "newtab": "wixtabs.html"
   },
+
 
   "manifest_version": 2,
 
