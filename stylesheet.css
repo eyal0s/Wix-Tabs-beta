@@ -19,7 +19,7 @@
     width: 180px;
     float: left;
     height: 100%;
-    background-image: linear-gradient(to bottom, #F0F0F0 0%, #F0F0F0 100%);
+    background-image: linear-gradient(to bottom, #fafafa 0%, #fafafa 100%);
     margin: 0;
     color: #4F4747;
     text-align: center;
@@ -28,7 +28,7 @@
     font-family: Helvetica Neue, Tahoma, Arial, sans-serif;
     opacity: 0.4;
     transition: .1s linear;
-    border-right: 1px solid #DDDDDD;
+    border-right: 1px solid #fafafa;
 }
 .wixtabs #title {
     font-family: Raleway, Helvetica;
@@ -71,6 +71,7 @@
     margin-left: 36px;
     text-align: left;
 }
+
 
 .wixtabs:hover {
     opacity: 1;
@@ -136,3 +137,27 @@
     top: 2px;
 }
 
+.news {
+  font-size: 9px;
+  text-align: left;
+  padding-left: 6px;
+  color: #4F4747;
+  position: absolute;
+  bottom: 40;
+  margin-left: 70px;
+  text-align: left;
+}
+
+.source {
+  text-align: left;
+  padding-left: 6px;
+  color: #4F4747;
+  position: absolute;
+  bottom: 5px;
+  margin-right: 0px;
+  right: 3px;
+}
+
+.premium {
+  color: purple;
+}

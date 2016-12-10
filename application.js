@@ -17,7 +17,7 @@ ver 0.4 24/12/14
 //             details = {
 //                 text: "on"
 //             };
-            
+
 //         } else {
 //             details = {
 //                 text: "off"
@@ -44,6 +44,19 @@ ver 0.4 24/12/14
     $(document).ready(function() {
         /* If the sites list is empty get a new list from the feed*/
         var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
+
+        //get the site type value from localStorage and set site selector
+        var siteType = localStorage.siteType;
+        if (siteType == "undefined") {
+          siteType = 1;
+          localstorage.siteType = 1;
+        }
+        $("#selectId").val(siteType);
+        // change site type
+        if(siteType == 2){ //one app
+          feed = "https://dl.dropboxusercontent.com/u/54065586/feeder-one.json";
+        }
+
         var sitesList = localStorage.wixSitesList;
         if (typeof sitesList != "undefined" && sitesList.length > 0 && JSON.parse(sitesList).length > 0) {
             showSite(JSON.parse(sitesList));
@@ -79,13 +92,25 @@ ver 0.4 24/12/14
         });
         $('#wixtabs .refresh').click(function(e) {
             e.preventDefault();
-            refreshCache();
+            //refreshCache();
+            localStorage.removeItem("wixSitesList");
             location.reload(); // Reloads the current document
         });
         // init bootstrap
         $(".refresh").tooltip();
         $(".contact").tooltip();
         $('.btn').button();
+
+        // add announcment
+        //$('.news').append("<p>WixTabs is back from the de</p>");
+
+        $( "#selectId" ).change(function() {
+            localStorage.siteType = this.value;
+            localStorage.removeItem("wixSitesList");
+            location.reload(); // Reloads the current document
+
+        });
+
     });
 //}
 
@@ -100,6 +125,10 @@ function showSite(sitesList) {
     if (obj['Site Url']) {
         url = obj['Site Url'];
     }
+    if (obj['PREVIEW']) {
+      url = obj['PREVIEW'];
+    }
+
     if (assertMobileViewMode(url)) {
         url = changeToDesktp(url);
     }
@@ -151,10 +180,62 @@ function showSite(sitesList) {
         $li.appendTo('.wixtabs .description');
         $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
     }
+
+    /* stuff to handle one app data*/
+    if (obj['View Count']){
+      var num = obj['View Count'];
+      $li = $('<li></li>');
+      $("<li><b>App Views &nbsp;</b></li>").append(num).appendTo('.wixtabs .description');
+    }
+    if (obj['Stores']){
+      var num = obj['Stores'];
+      $li = $('<li></li>');
+      $("<li><b>Stores Views &nbsp;</b></li>").append(num).appendTo('.wixtabs .description');
+    }
+    if (obj['Hotels']){
+      var num = obj['Hotels'];
+      $li = $('<li></li>');
+      $("<li><b>Hotels Views &nbsp;</b></li>").append(num).appendTo('.wixtabs .description');
+    }
+    if (obj['Blog']){
+      var num = obj['Blog'];
+      $li = $('<li></li>');
+      $("<li><b>Blog Views &nbsp;</b></li>").append(num).appendTo('.wixtabs .description');
+    }
+    if (obj['Visitors Viewes']){
+      var num = obj['View Count'];
+      $li = $('<li></li>');
+      $("<li><b>Visitors Views &nbsp;</b></li>").append(num).appendTo('.wixtabs .description');
+    }
+
+    if (obj['Verticals']){
+      var val = obj['Verticals'];
+      $li = $('<li></li>');
+      $("<li><b>Vertical &nbsp;</b></li>").append(val).appendTo('.wixtabs .description');
+    }
+
+    if (obj['Premium']){
+      var val = obj['Premium'];
+      if (val = "yes") {
+        $li = $('<li></li>').addClass("premium");
+        $("<li><b>Premium &nbsp;</b></li>").addClass("premium").appendTo('.wixtabs .description');
+      }
+    }
+
+    if (obj['PREVIEW']) {
+        $li = $('<li></li>');
+        $('<a></a>').text('Explore Site').attr('href', $('.startframe').attr('src')).appendTo($li);
+        //$('<a></a>').text('site link').attr('href', obj['Url']).attr('target', '_BLANK').appendTo($li);
+        $li.appendTo('.wixtabs .description');
+        $("<hr class=\"nomargin\">").appendTo('.wixtabs .description');
+    }
+
+
     // set view mode - mobile / desktop
     //setViewMode(obj['Url']);
     setViewMode($('.startframe').attr('src'));
 }
+
 // assert true if letters are latin
 function enOnly(str) {
     var pat = /[a-z]/;
@@ -172,6 +253,7 @@ function dayCount(date) {
     var secondDate = new Date();
     return Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay)));
 }
+
 // toolbar toggle
 function toggle_tab() {
     $('.wixtabs').toggleClass('hide');
