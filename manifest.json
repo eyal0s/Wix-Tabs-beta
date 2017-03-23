@@ -1,7 +1,7 @@
 {
   "name": "Wix Tabs",
   "description": "Get to know Wix users",
-  "version": "0.5",
+  "version": "1.1",
   "background": {
     "scripts": ["application.js"],
     "persistent": false

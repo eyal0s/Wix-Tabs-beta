@@ -43,7 +43,7 @@ ver 0.4 24/12/14
     })();
     $(document).ready(function() {
         /* If the sites list is empty get a new list from the feed*/
-        var feed = "https://dl.dropboxusercontent.com/u/54065586/feeder.json";
+        var feed = "hhttps://www.dropbox.com/s/5dd7vxb9u70lo43/feeder.json?dl=0";
 
         //get the site type value from localStorage and set site selector
         var siteType = localStorage.siteType;
@@ -54,7 +54,7 @@ ver 0.4 24/12/14
         $("#selectId").val(siteType);
         // change site type
         if(siteType == 2){ //one app
-          feed = "https://dl.dropboxusercontent.com/u/54065586/feeder-one.json";
+          feed = "https://www.dropbox.com/s/mae526rj1myh38r/feeder-one.json?dl=0";
         }
 
         var sitesList = localStorage.wixSitesList;
