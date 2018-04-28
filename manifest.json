@@ -1,7 +1,7 @@
 {
   "name": "Wix Tabs",
   "description": "Get to know Wix users",
-  "version": "1.1",
+  "version": "1.12",
   "background": {
     "scripts": ["application.js"],
     "persistent": false
@@ -20,7 +20,6 @@
 
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "permissions": [
-    "tabs",
-    "https://dl.dropboxusercontent.com/u/54065586/"
+    "tabs"
   ]
 }
